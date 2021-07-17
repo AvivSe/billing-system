@@ -4,9 +4,10 @@ import Customer from "./customer.entity";
 import CreateCustomerDto from "./dto/CreateCustomerDto";
 import UpdateCustomerDto from "./dto/UpdateCustomerDto";
 
-@Controller('api/customer')
+@Controller("api/customer")
 export class CustomerController {
-  constructor(private readonly customerService: CustomerService) {}
+  constructor(private readonly customerService: CustomerService) {
+  }
 
   @Get()
   get(): Promise<Customer[]> {
@@ -23,8 +24,13 @@ export class CustomerController {
     return this.customerService.update(updateCustomerDto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   delete(@Param() params): Promise<Customer> {
     return this.customerService.delete(params.id);
+  }
+
+  @Get("migrate")
+  migrate(): any {
+    return this.customerService.migrate();
   }
 }

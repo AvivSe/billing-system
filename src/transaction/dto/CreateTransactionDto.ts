@@ -12,7 +12,6 @@ class CreateTransactionDto {
   currency: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   creditCardType: string;
 
   @Length(2, 60)

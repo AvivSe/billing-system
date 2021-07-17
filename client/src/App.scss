@@ -1,0 +1,21 @@
+.gridWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  header {
+    display: flex;
+    align-items: flex-end;
+    width: 80%;
+    height: 100px;
+    justify-content: space-between;
+  }
+  .grid {
+    width: 80%;
+    height: 70vh;
+    background-color: #f8f8f8;
+  }
+}

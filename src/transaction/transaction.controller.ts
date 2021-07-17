@@ -20,7 +20,7 @@ export class TransactionController {
   }
 
   @Put()
-  update(@Body() updateTransactionDto: UpdateTransactionDto): Promise<UpdateResult> {
+  update(@Body() updateTransactionDto: UpdateTransactionDto): Promise<Transaction> {
     return this.transactionService.update(updateTransactionDto);
   }
 

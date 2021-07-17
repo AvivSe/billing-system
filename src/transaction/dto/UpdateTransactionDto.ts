@@ -19,7 +19,6 @@ class UpdateTransactionDto {
   currency: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   creditCardType: string;
 

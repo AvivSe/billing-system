@@ -20,11 +20,12 @@ export class TransactionService {
   async create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const transaction = Transaction.create(createTransactionDto)
     await transaction.save();
-    return transaction;
+    return await Transaction.findOneOrFail(transaction.id, { relations: ['customer']});
   }
 
-  update(createTransactionDto: UpdateTransactionDto): Promise<UpdateResult> {
-    return this.transactionRepository.update(createTransactionDto.id, createTransactionDto);
+  async update(createTransactionDto: UpdateTransactionDto): Promise<Transaction> {
+    await this.transactionRepository.update(createTransactionDto.id, createTransactionDto);
+    return this.transactionRepository.findOneOrFail(createTransactionDto.id, { relations: ['customer'] });
   }
 
   delete(id: string): Promise<DeleteResult> {
