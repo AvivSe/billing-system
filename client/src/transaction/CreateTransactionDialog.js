@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField
 } from "@material-ui/core";
@@ -35,14 +34,9 @@ export default function CreateTransactionDialog({ open, onClose, customers, onMu
         }>
         {({
             values,
-            errors,
-            touched,
             handleChange,
-            handleBlur,
             handleSubmit,
-            isSubmitting,
             setFieldValue
-            /* and other goodies */
           }) => (<form onSubmit={handleSubmit} className={"formDialog"}>
           <Autocomplete
             id="customerId"

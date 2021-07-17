@@ -3,10 +3,12 @@ import { DataGrid } from "@material-ui/data-grid";
 import { Button, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/DeleteOutline";
 import CreateIcon from "@material-ui/icons/Create";
+
 import { deleteCustomer, getCustomers } from "../api/customers";
 import CreateCustomerDialog from "./CreateCustomerDialog";
 
-export default function Customers() {
+
+function Customers() {
   const [customers, setCustomers] = useState({});
   const [error, setError] = useState(undefined);
   const [loading, setLoading] = useState(false);
@@ -97,7 +99,8 @@ export default function Customers() {
           {
             field: "gender",
             headerName: "Gender",
-            width: 200
+            width: 200,
+            valueFormatter: params => ({0: "Male", 1: "Female", 2: "Bi"}[params.row.gender])
           },
           {
             field: "country",
@@ -122,7 +125,7 @@ export default function Customers() {
           {
             field: "",
             headerName: "",
-            width: 120,
+            width: 180,
             renderCell: function(params) {
               return <>
                 <IconButton onClick={() => handleDeleteCustomer(params.row.id)}
@@ -150,6 +153,9 @@ export default function Customers() {
         }
       }
     />
+
   </div>;
 
 }
+
+export default Customers;

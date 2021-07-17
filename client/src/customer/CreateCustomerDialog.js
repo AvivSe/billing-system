@@ -34,12 +34,8 @@ export default function CreateCustomerDialog({ open, onClose, onMutation, update
         }>
         {({
             values,
-            errors,
-            touched,
             handleChange,
-            handleBlur,
             handleSubmit,
-            isSubmitting,
             setFieldValue
           }) => (<form onSubmit={handleSubmit} className={"formDialog"}>
           <TextField variant={"outlined"} id="firstName" label="First name" margin={"dense"} value={values.firstName}
