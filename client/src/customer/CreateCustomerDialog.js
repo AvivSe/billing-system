@@ -16,7 +16,7 @@ import { createCustomer, updateCustomer as _updateCustomer } from "../api/custom
 export default function CreateCustomerDialog({ open, onClose, onMutation, updateCustomer }) {
   const [error, setError] = useState(undefined);
   const creationMode = !updateCustomer;
-  console.log("updateCustomer",updateCustomer);
+
   return <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
     <DialogTitle id="form-dialog-title">{creationMode ? "New Customer" : `Update Customer`}
       {!creationMode && <span style={{ fontSize: 16, marginLeft: 20 }}># {updateCustomer.id}</span>}

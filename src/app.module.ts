@@ -4,9 +4,16 @@ import Customer from "./customer/customer.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CustomerModule } from "./customer/customer.module";
 import { TransactionModule } from "./transaction/transaction.module";
+import { join } from "path";
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "client", "build"),
+      exclude: ["/api*"]
+    }),
+    TypeOrmModule.forRoot({
     type: "sqlite",
     database: "./database/database.sqlite3",
     entities: [Transaction, Customer],
