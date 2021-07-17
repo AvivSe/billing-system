@@ -20,7 +20,7 @@ export class CustomerController {
   }
 
   @Put()
-  update(@Body() updateCustomerDto: UpdateCustomerDto) {
+  update(@Body() updateCustomerDto: UpdateCustomerDto): Promise<Customer> {
     return this.customerService.update(updateCustomerDto);
   }
 

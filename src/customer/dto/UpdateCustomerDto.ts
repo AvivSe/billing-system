@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsEmail, IsEnum, IsOptional, Length } from "class-validator";
+import { IsEmail, IsEnum, IsOptional, Length } from "class-validator";
 import { Gender } from "../customer.entity";
 
 class UpdateCustomerDto {
@@ -7,12 +7,10 @@ class UpdateCustomerDto {
   id: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   firstName: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   lastName: string;
 
@@ -25,17 +23,14 @@ class UpdateCustomerDto {
   gender: Gender;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   country: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   city: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   street: string;
 

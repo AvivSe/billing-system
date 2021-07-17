@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsOptional, Length } from "class-validator";
+import { IsOptional, Length } from "class-validator";
 
 class UpdateTransactionDto {
 
@@ -14,7 +14,6 @@ class UpdateTransactionDto {
   totalPrice: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   currency: string;
 
@@ -23,7 +22,6 @@ class UpdateTransactionDto {
   creditCardType: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
   creditCardNumber: string;
 

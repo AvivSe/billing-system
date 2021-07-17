@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import Customers from "./customer/Customers";
 
 function App() {
 
@@ -12,8 +13,9 @@ function App() {
   return <Router>
     <Switch>
       <Route path={"/customers"}>
-        Customers
+        <Customers/>
       </Route>
+
       <Route path={"/"}>
         <Transactions />
       </Route>

@@ -1,4 +1,4 @@
-import { IsAlphanumeric, Length } from "class-validator";
+import { Length } from "class-validator";
 
 class CreateTransactionDto {
   @Length(36, 36)
@@ -8,14 +8,12 @@ class CreateTransactionDto {
   totalPrice: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   currency: string;
 
   @Length(2, 60)
   creditCardType: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   creditCardNumber: string;
 
 }

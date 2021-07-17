@@ -14,7 +14,8 @@ export class CustomerService {
     private customerRepository: Repository<Customer>,
     @InjectRepository(Customer)
     private transactionRepository: Repository<Transaction>
-  ) {}
+  ) {
+  }
 
   get(): Promise<Customer[]> {
     return this.customerRepository.find();
@@ -26,13 +27,16 @@ export class CustomerService {
     return customer;
   }
 
-  update(updateCustomerDto: UpdateCustomerDto): Promise<UpdateResult> {
-    return Customer.update(updateCustomerDto.id, updateCustomerDto);
+  async update(updateCustomerDto: UpdateCustomerDto): Promise<Customer> {
+    await Customer.update(updateCustomerDto.id, updateCustomerDto);
+    return this.customerRepository.findOneOrFail(updateCustomerDto.id);
   }
 
   async delete(id: string): Promise<Customer> {
-    const customer = await Customer.findOneOrFail(id, { relations: ['transactions']});
-    await this.transactionRepository.delete(customer.transactions.map(({id})=>id))
+    const customer = await Customer.findOneOrFail(id, { relations: ["transactions"] });
+    for (const transaction of customer.transactions) {
+      await transaction.remove()
+    }
     return await customer.remove();
   }
 

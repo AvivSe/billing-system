@@ -36,15 +36,7 @@ export default function Transactions() {
       };
     });
     setOpenCreateDialog(false);
-    setUpdateTransaction(false);
-  }
-
-  if (loading) {
-    return "Loading...";
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
+    setUpdateTransaction(undefined);
   }
 
   function handleDeleteTransaction(id) {
@@ -57,6 +49,14 @@ export default function Transactions() {
         });
       });
     }
+  }
+
+  if (loading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return <div className={"gridWrapper"}>
