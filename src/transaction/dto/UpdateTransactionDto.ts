@@ -1,52 +1,33 @@
-import { OneToMany } from "typeorm";
-import Transaction from "../../transaction/transaction.entity";
-import { IsAlphanumeric, IsEmail, IsEnum, IsOptional, Length } from "class-validator";
-import { Gender } from "../customer.entity";
+import { IsAlphanumeric, IsOptional, Length } from "class-validator";
 
-class UpdateCustomerDto {
+class UpdateTransactionDto {
 
   @Length(36, 36)
   id: string;
 
-  @Length(2, 60)
-  @IsAlphanumeric()
+  @Length(36, 36)
   @IsOptional()
-  firstName: string;
+  customerId: string;
 
   @Length(2, 60)
-  @IsAlphanumeric()
   @IsOptional()
-  lastName: string;
-
-  @IsEmail()
-  @IsOptional()
-  email: string;
-
-  @IsEnum(Gender)
-  @IsOptional()
-  gender: Gender;
+  totalPrice: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
   @IsOptional()
-  country: string;
+  currency: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
   @IsOptional()
-  city: string;
+  creditCardType: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
   @IsOptional()
-  street: string;
+  creditCardNumber: string;
 
-  @Length(2, 60)
-  @IsOptional()
-  phone: string;
-
-  @OneToMany(() => Transaction, transaction => transaction.customer)
-  transactions: Transaction[];
 }
 
-export default UpdateCustomerDto;
+export default UpdateTransactionDto;

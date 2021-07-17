@@ -1,18 +1,30 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
-import { TransactionService } from "./transaction.service";
-import Transaction from "../transaction/transaction.entity";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { CustomerService } from "./customer.service";
+import Customer from "./customer.entity";
+import CreateCustomerDto from "./dto/CreateCustomerDto";
+import UpdateCustomerDto from "./dto/UpdateCustomerDto";
 
-@Controller('/api/transaction')
+@Controller('api/customer')
 export class CustomerController {
-  constructor(private readonly customerController: CustomerController) {}
+  constructor(private readonly customerService: CustomerService) {}
 
   @Get()
-  get(): Promise<CustomerController[]> {
-    return this.customerController.get();
+  get(): Promise<Customer[]> {
+    return this.customerService.get();
   }
 
   @Post()
-  create(@Body() createTransactionDto: Transaction): Promise<Transaction> {
-    return this.customerController.create(createTransactionDto);
+  create(@Body() createCustomerDto: CreateCustomerDto): Promise<Customer> {
+    return this.customerService.create(createCustomerDto);
+  }
+
+  @Put()
+  update(@Body() updateCustomerDto: UpdateCustomerDto) {
+    return this.customerService.update(updateCustomerDto);
+  }
+
+  @Delete(':id')
+  delete(@Param() params): Promise<Customer> {
+    return this.customerService.delete(params.id);
   }
 }

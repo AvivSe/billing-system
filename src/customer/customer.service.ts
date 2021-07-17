@@ -1,23 +1,38 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, UpdateResult } from "typeorm";
+import Customer from "./customer.entity";
 import Transaction from "../transaction/transaction.entity";
-import { Repository } from "typeorm";
+import CreateCustomerDto from "./dto/CreateCustomerDto";
+import UpdateCustomerDto from "./dto/UpdateCustomerDto";
 
 @Injectable()
-export class TransactionService {
+export class CustomerService {
 
   constructor(
-    @InjectRepository(Transaction)
+    @InjectRepository(Customer)
+    private customerRepository: Repository<Customer>,
+    @InjectRepository(Customer)
     private transactionRepository: Repository<Transaction>
   ) {}
 
-  getAllTransactions(): Promise<Transaction[]> {
-    return this.transactionRepository.find();
+  get(): Promise<Customer[]> {
+    return this.customerRepository.find();
   }
 
-  async create(createTransactionDto: Transaction): Promise<Transaction> {
-    const transaction = Transaction.create(createTransactionDto)
-    await transaction.save();
-    return transaction;
+  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
+    const customer = Customer.create(createCustomerDto);
+    await customer.save();
+    return customer;
+  }
+
+  update(updateCustomerDto: UpdateCustomerDto): Promise<UpdateResult> {
+    return Customer.update(updateCustomerDto.id, updateCustomerDto);
+  }
+
+  async delete(id: string): Promise<Customer> {
+    const customer = await Customer.findOneOrFail(id, { relations: ['transactions']});
+    await this.transactionRepository.delete(customer.transactions.map(({id})=>id))
+    return await customer.remove();
   }
 }

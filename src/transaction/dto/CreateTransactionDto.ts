@@ -1,43 +1,24 @@
-import { OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import Transaction from "../../transaction/transaction.entity";
-import { Length, IsAlphanumeric, IsEmail, IsEnum } from "class-validator";
-import { Gender } from "../customer.entity";
+import { IsAlphanumeric, Length } from "class-validator";
 
-class CreateCustomerDto {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+class CreateTransactionDto {
+  @Length(36, 36)
+  customerId: string;
+
+  @Length(2, 60)
+  totalPrice: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
-  firstName: string;
+  currency: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
-  lastName: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsEnum(Gender)
-  gender: Gender;
+  creditCardType: string;
 
   @Length(2, 60)
   @IsAlphanumeric()
-  country: string;
+  creditCardNumber: string;
 
-  @Length(2, 60)
-  @IsAlphanumeric()
-  city: string;
-
-  @Length(2, 60)
-  @IsAlphanumeric()
-  street: string;
-
-  @Length(2, 60)
-  phone: string;
-
-  @OneToMany(() => Transaction, transaction => transaction.customer)
-  transactions: Transaction[];
 }
 
-export default CreateCustomerDto;
+export default CreateTransactionDto;
